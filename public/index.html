@@ -8,75 +8,164 @@
 </head>
 <body>
   <main class="phone">
-    <section class="screen active" id="home">
+    <section class="screen active hero" id="home">
+      <div class="aura"></div>
       <div class="logo">✦</div>
-      <p class="tag">Premium AI savęs pažinimas</p>
+      <p class="tag">Premium savęs pažinimo profilis</p>
       <h1>AUREA</h1>
-      <p class="sub">Delnai, veidas, balsas, gimimo data, asmenybės testas, meilė, finansai, karjera ir suderinamumas viename AI gyvenimo profilyje.</p>
+      <p class="sub">
+        Chiromantija, veidotyra, numerologija ir AI interpretacija viename asmeniniame profilyje.
+      </p>
+
+      <input id="userName" class="name-input" placeholder="Įrašyk vardą" />
       <button id="startBtn">Pradėti analizę</button>
-      <p class="trust">🔒 Saugu · ✨ Personalizuota · 💎 Premium</p>
+
+      <p class="trust">✦ Juoda · Auksas · Personalizuota · Subtilu</p>
     </section>
 
     <section class="screen" id="goal">
       <p class="tag">1 žingsnis</p>
       <h2>Ką nori sužinoti?</h2>
+
       <div class="grid">
-        <button class="choice">❤️ Meilė</button>
-        <button class="choice">💰 Finansai</button>
-        <button class="choice">🚀 Karjera</button>
-        <button class="choice">⭐ Misija</button>
-        <button class="choice">🧠 Charakteris</button>
-        <button class="choice">💞 Suderinamumas</button>
+        <button class="choice" data-goal="love">❤️ Meilė</button>
+        <button class="choice" data-goal="money">💰 Finansai</button>
+        <button class="choice" data-goal="career">🚀 Karjera</button>
+        <button class="choice" data-goal="mission">⭐ Misija</button>
+        <button class="choice" data-goal="character">🧠 Charakteris</button>
+        <button class="choice" data-goal="compatibility">💞 Suderinamumas</button>
       </div>
+
       <button id="toModules">Tęsti</button>
+      <p class="error" id="goalError"></p>
     </section>
 
     <section class="screen" id="modules">
       <p class="tag">2 žingsnis</p>
-      <h2>Pasirink analizės būdus</h2>
-      <div class="grid">
-        <button class="choice">✋ Delnai</button>
-        <button class="choice">🙂 Veidas</button>
-        <button class="choice">🎤 Balsas</button>
-        <button class="choice">📅 Gimimo data</button>
-        <button class="choice">🧠 Testas</button>
-        <button class="choice premium">✨ Pilnas profilis</button>
+      <h2>Pasirink analizės metodus</h2>
+
+      <div class="method-list">
+        <button class="method" data-method="palm">
+          <span>✋</span>
+          <strong>Delnų analizė</strong>
+          <small>Chiromantija: linijos, delno tipas, kalneliai.</small>
+        </button>
+
+        <button class="method" data-method="face">
+          <span>🙂</span>
+          <strong>Veido analizė</strong>
+          <small>Veidotyra: forma, akys, lūpos, žandikaulis.</small>
+        </button>
+
+        <button class="method" data-method="voice">
+          <span>🎤</span>
+          <strong>Balso analizė</strong>
+          <small>Tembras, ritmas, pasitikėjimo įspūdis.</small>
+        </button>
+
+        <button class="method" data-method="birth">
+          <span>📅</span>
+          <strong>Gimimo data</strong>
+          <small>Numerologija: gyvenimo kelias, ciklai, talentai.</small>
+        </button>
+
+        <button class="method" data-method="test">
+          <span>🧠</span>
+          <strong>Asmenybės testas</strong>
+          <small>Sprendimai, emocijos, motyvacija, tikslai.</small>
+        </button>
+
+        <button class="method premium-method" data-method="full">
+          <span>✨</span>
+          <strong>Pilnas profilis</strong>
+          <small>Visi metodai sujungiami į vieną AUREA profilį.</small>
+        </button>
       </div>
+
       <button id="toData">Tęsti</button>
+      <p class="error" id="methodError"></p>
     </section>
 
     <section class="screen" id="data">
       <p class="tag">3 žingsnis</p>
-      <h2>Įkelk duomenis</h2>
-      <input type="file" accept="image/*" />
-      <input type="file" accept="audio/*" />
-      <input type="date" />
-      <input id="partnerName" placeholder="Partnerio vardas suderinamumui" />
-      <textarea placeholder="Kas šiuo metu tau svarbiausia?"></textarea>
+      <h2>Įkelk reikalingus duomenis</h2>
+
+      <div class="upload-card" data-required="face">
+        <label>🙂 Veido nuotrauka</label>
+        <input id="faceFile" type="file" accept="image/*" />
+        <small>Naudojama veidotyros interpretacijai.</small>
+      </div>
+
+      <div class="upload-card" data-required="palm">
+        <label>✋ Delno nuotrauka</label>
+        <input id="palmFile" type="file" accept="image/*" />
+        <small>Naudojama chiromantinei interpretacijai.</small>
+      </div>
+
+      <div class="upload-card" data-required="voice">
+        <label>🎤 Balso įrašas</label>
+        <input id="voiceFile" type="file" accept="audio/*" />
+        <small>Naudojama komunikacijos stiliaus interpretacijai.</small>
+      </div>
+
+      <div class="upload-card" data-required="birth">
+        <label>📅 Gimimo data</label>
+        <input id="birthDate" type="date" />
+        <small>Naudojama numerologiniam profiliui.</small>
+      </div>
+
+      <div class="upload-card">
+        <label>💞 Partnerio vardas suderinamumui</label>
+        <input id="partnerName" placeholder="Pvz. Mantas" />
+      </div>
+
+      <div class="upload-card" data-required="test">
+        <label>🧠 Trumpas asmenybės klausimas</label>
+        <textarea id="lifeText" placeholder="Kas šiuo metu Tau svarbiausia gyvenime?"></textarea>
+      </div>
+
       <button id="analyzeBtn">Analizuoti</button>
+      <p class="error" id="dataError"></p>
     </section>
 
     <section class="screen" id="loading">
       <p class="tag">AUREA AI</p>
-      <h2>Kuriamas tavo profilis...</h2>
-      <div class="scanner">✋</div>
-      <p id="status">Analizuojami signalai...</p>
+      <h2>Kuriamas profilis</h2>
+
+      <div class="scanner">
+        <div class="scan-hand">✋</div>
+        <div class="scan-line"></div>
+      </div>
+
+      <div class="progress-wrap">
+        <div id="progressBar"></div>
+      </div>
+
+      <ul class="scan-list" id="scanList"></ul>
     </section>
 
     <section class="screen" id="teaser">
-      <p class="tag">Aptikta</p>
-      <h2>Tavo analizė paruošta 87%</h2>
-      <div class="teasers">
-        <div>✅ Stipri intuicija</div>
-        <div>✅ Finansinis potencialas</div>
-        <div>✅ Santykių modelis</div>
-        <div>✅ Karjeros kryptis</div>
-        <div>🔒 Pinigų kelias</div>
-        <div>🔒 Meilės analizė</div>
-        <div>🔒 Gyvenimo misija</div>
-        <div>🔒 Suderinamumas</div>
+      <p class="tag">Analizė paruošta</p>
+      <h2 id="teaserTitle">Tavo AUREA profilis paruoštas 87%</h2>
+
+      <div class="teaser-card unlocked">
+        <h3>❤️ Meilės modelis</h3>
+        <p>Ryšiuose išryškėja poreikis emociniam saugumui ir gilesniam pasitikėjimui.</p>
+        <p>Analizė aptiko modelį, kuris gali kartotis santykių pasirinkimuose.</p>
       </div>
-      <button id="toPayment">Atrakinti analizę</button>
+
+      <div class="teaser-card unlocked">
+        <h3>💰 Finansinis potencialas</h3>
+        <p>Profilyje matomas polinkis kurti vertę per savarankiškumą ir asmeninę įtaką.</p>
+        <p>Viena kryptis gali turėti didesnį augimo potencialą nei kitos.</p>
+      </div>
+
+      <div class="teaser-card locked">🔒 Karjeros kryptis</div>
+      <div class="teaser-card locked">🔒 Gyvenimo misija</div>
+      <div class="teaser-card locked">🔒 Charakterio archetipas</div>
+      <div class="teaser-card locked">🔒 Suderinamumo analizė</div>
+
+      <button id="toPayment">Atrakinti pilną analizę</button>
     </section>
 
     <section class="screen" id="payment">
@@ -86,67 +175,54 @@
       <div class="plan-card">
         <h3>📅 Gimimo datos analizė</h3>
         <div class="plan-price">4,99 €</div>
-        <p>• Gyvenimo kelio skaičius<br>• Talentai<br>• Stiprybės<br>• Silpnybės</p>
-        <button id="birthBtn">Rinktis už 4,99 €</button>
+        <p>Gyvenimo kelio skaičius, talentai, stiprybės ir vidiniai ciklai.</p>
+        <button id="birthBtn">Rinktis</button>
       </div>
 
       <div class="plan-card">
         <h3>🙂✋ Viena pasirinkta analizė</h3>
         <div class="plan-price">9,99 €</div>
-        <p>Pasirink vieną:<br>• Delnai<br>• Veidas<br>• Balsas<br>• Asmenybės testas</p>
-        <button id="singleBtn">Rinktis už 9,99 €</button>
+        <p>Pasirink vieną: delnai, veidas, balsas arba asmenybės testas.</p>
+        <button id="singleBtn">Rinktis</button>
       </div>
 
       <div class="plan-card">
         <h3>💞 Suderinamumas</h3>
         <div class="plan-price">14,99 €</div>
-        <p>• Partnerių analizė<br>• Stiprybės<br>• Konfliktų taškai<br>• Ateities potencialas</p>
-        <button id="compatibilityBtn">Rinktis už 14,99 €</button>
+        <p>Ryšio potencialas, stipriosios vietos, konfliktų taškai ir ateities kryptis.</p>
+        <button id="compatibilityBtn">Rinktis</button>
       </div>
 
       <div class="plan-card premium-card">
         <h3>✨ Pilnas AI gyvenimo profilis</h3>
         <div class="plan-price">29,99 €</div>
-        <p>• Delnai<br>• Veidas<br>• Balsas<br>• Gimimo data<br>• Testas<br>• Meilė<br>• Finansai<br>• Karjera<br>• Misija</p>
+        <p>Delnai, veidas, balsas, gimimo data, testas, meilė, finansai, karjera ir misija.</p>
         <button id="premiumBtn">Gauti pilną profilį</button>
       </div>
 
       <div class="plan-card popular-plan">
-        <div class="badge">🔥 Populiariausias planas</div>
+        <div class="badge">🔥 Populiariausias</div>
         <h3>💎 AUREA Unlimited</h3>
         <div class="plan-price">19,99 €/mėn</div>
-        <p>
-          • Neribotos analizės<br>
-          • Analizuok save ir kitus<br>
-          • Neribotas suderinamumas<br>
-          • Kas savaitę naujos įžvalgos<br>
-          • AI koučingo klausimai<br>
-          • Santykių, karjeros ir finansų analizės<br>
-          • Prioritetinis AI atsakymas
-        </p>
+        <p>Neribotos analizės, suderinamumai, savaitinės įžvalgos, AI koučingas ir prioritetinis atsakymas.</p>
         <button id="monthlyBtn">Rinktis Unlimited</button>
       </div>
 
-      <button id="demoBtn" class="ghost">Demo rezultatas</button>
-      <p id="payError"></p>
+      <button id="demoBtn" class="ghost">Peržiūrėti demo rezultatą</button>
+      <p id="payError" class="error"></p>
     </section>
 
     <section class="screen" id="results">
-      <p class="tag">Rezultatas</p>
-      <h2>Tavo gyvenimo profilis</h2>
+      <p class="tag">AUREA profilis</p>
+      <h2 id="resultName">Asmeninė analizė</h2>
+      <p class="sub">Sugeneruota pagal pateiktus duomenis ir pasirinktus analizės metodus.</p>
 
       <div class="score-row">
         <div><b>91%</b><span>Finansai</span></div>
         <div><b>88%</b><span>Meilė</span></div>
       </div>
 
-      <div class="result-card">👑 Archetipas: Auksinis Vizionierius</div>
-      <div class="result-card">❤️ Meilė: ieškai gilaus, lojalaus ir stabilaus ryšio.</div>
-      <div class="result-card">💰 Finansai: stipriausia kryptis — verslas, marketingas, pardavimai ir skaitmeniniai produktai.</div>
-      <div class="result-card">🚀 Karjera: tau tinka kūryba, strategija, konsultavimas ir asmeninis prekės ženklas.</div>
-      <div class="result-card">⭐ Misija: kurti vertę žmonėms per įžvalgas, grožį ir transformaciją.</div>
-      <div class="result-card">⚠️ Iššūkiai: atidėliojimas, perfekcionizmas ir baimė būti matomam.</div>
-      <div class="result-card" id="compatibility">💞 Suderinamumas: 89%.</div>
+      <div id="resultSections"></div>
 
       <button onclick="location.reload()">Pradėti iš naujo</button>
     </section>
