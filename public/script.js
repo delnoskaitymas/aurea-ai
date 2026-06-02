@@ -14,9 +14,7 @@ async function startStripeCheckout(plan) {
   try {
     const res = await fetch("/create-checkout-session", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ plan })
     });
 
@@ -25,18 +23,12 @@ async function startStripeCheckout(plan) {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      if (errorBox) {
-        errorBox.textContent = data.error || "Nepavyko sukurti Stripe mokėjimo.";
-      } else {
-        alert(data.error || "Nepavyko sukurti Stripe mokėjimo.");
-      }
+      if (errorBox) errorBox.textContent = data.error || "Nepavyko sukurti Stripe mokėjimo.";
+      else alert(data.error || "Nepavyko sukurti Stripe mokėjimo.");
     }
   } catch (error) {
-    if (errorBox) {
-      errorBox.textContent = "Stripe klaida. Patikrink Railway Variables.";
-    } else {
-      alert("Stripe klaida. Patikrink Railway Variables.");
-    }
+    if (errorBox) errorBox.textContent = "Stripe klaida. Patikrink Railway Variables.";
+    else alert("Stripe klaida. Patikrink Railway Variables.");
   }
 }
 
@@ -63,29 +55,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (demoBtn) demoBtn.onclick = () => showResults();
 
   const birthBtn = document.getElementById("birthBtn");
-  if (birthBtn) {
-    birthBtn.onclick = () => startStripeCheckout("birth");
-  }
+  if (birthBtn) birthBtn.onclick = () => startStripeCheckout("birth");
 
   const singleBtn = document.getElementById("singleBtn");
-  if (singleBtn) {
-    singleBtn.onclick = () => startStripeCheckout("single");
-  }
+  if (singleBtn) singleBtn.onclick = () => startStripeCheckout("single");
 
   const compatibilityBtn = document.getElementById("compatibilityBtn");
-  if (compatibilityBtn) {
-    compatibilityBtn.onclick = () => startStripeCheckout("compatibility");
-  }
+  if (compatibilityBtn) compatibilityBtn.onclick = () => startStripeCheckout("compatibility");
 
   const premiumBtn = document.getElementById("premiumBtn");
-  if (premiumBtn) {
-    premiumBtn.onclick = () => startStripeCheckout("premium");
-  }
+  if (premiumBtn) premiumBtn.onclick = () => startStripeCheckout("premium");
 
   const monthlyBtn = document.getElementById("monthlyBtn");
-  if (monthlyBtn) {
-    monthlyBtn.onclick = () => startStripeCheckout("monthly");
-  }
+  if (monthlyBtn) monthlyBtn.onclick = () => startStripeCheckout("monthly");
 
   document.querySelectorAll(".choice").forEach(button => {
     button.onclick = () => button.classList.toggle("active");
@@ -98,18 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         const status = document.getElementById("status");
-        if (status) {
-          status.textContent =
-            "Sujungiami delnų, veido, balso, testo ir gimimo datos signalai...";
-        }
+        if (status) status.textContent = "Sujungiami delnų, veido, balso, testo ir gimimo datos signalai...";
       }, 900);
 
       setTimeout(() => {
         const status = document.getElementById("status");
-        if (status) {
-          status.textContent =
-            "Formuojamas tavo gyvenimo profilis...";
-        }
+        if (status) status.textContent = "Formuojamas tavo gyvenimo profilis...";
       }, 1800);
 
       setTimeout(() => {
@@ -122,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function showResults() {
   const partnerInput = document.getElementById("partnerName");
   const compatibility = document.getElementById("compatibility");
-
   const partner = partnerInput ? partnerInput.value.trim() : "";
 
   if (partner && compatibility) {
