@@ -21,12 +21,11 @@ const plans = {
 app.post("/create-checkout-session", async (req, res) => {
   try {
     const { plan } = req.body;
+    const selectedPlan = plans[plan];
 
     if (!process.env.STRIPE_SECRET_KEY) {
       return res.status(400).json({ error: "Trūksta STRIPE_SECRET_KEY" });
     }
-
-    const selectedPlan = plans[plan];
 
     if (!selectedPlan || !selectedPlan.price) {
       return res.status(400).json({ error: "Neteisingas planas arba trūksta Stripe Price ID" });
