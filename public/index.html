@@ -1,12 +1,176 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AUREA AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AUREA AI</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<h1>AUREA AI veikia 🚀</h1>
-<p>Pirmasis testinis puslapis.</p>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <main class="app">
+    <section class="screen active" id="home">
+      <div class="logo">✦</div>
+      <p class="tag">AI gyvenimo profilio platforma</p>
+      <h1>AUREA AI</h1>
+      <p class="sub">
+        Pasirink, ką nori sužinoti apie save: meilę, finansus, karjerą,
+        gyvenimo misiją, asmenybę ar suderinamumą.
+      </p>
+      <button onclick="goTo('interests')">Pradėti analizę</button>
+    </section>
+
+    <section class="screen" id="interests">
+      <p class="tag">1 žingsnis</p>
+      <h2>Kas tave domina labiausiai?</h2>
+
+      <div class="grid">
+        <button class="card choice">❤️ Meilė</button>
+        <button class="card choice">💰 Finansai</button>
+        <button class="card choice">🚀 Karjera</button>
+        <button class="card choice">🧠 Asmenybė</button>
+        <button class="card choice">⭐ Gyvenimo misija</button>
+        <button class="card choice">💞 Suderinamumas</button>
+      </div>
+
+      <button onclick="goTo('methods')">Tęsti</button>
+    </section>
+
+    <section class="screen" id="methods">
+      <p class="tag">2 žingsnis</p>
+      <h2>Kaip nori gauti analizę?</h2>
+
+      <div class="grid">
+        <button class="card choice">✋ Delnų analizė</button>
+        <button class="card choice">🙂 Veido analizė</button>
+        <button class="card choice">🎤 Balso analizė</button>
+        <button class="card choice">🧠 Asmenybės testas</button>
+        <button class="card choice">📅 Gimimo data</button>
+        <button class="card choice">✨ Pilnas AI profilis</button>
+      </div>
+
+      <button onclick="goTo('upload')">Tęsti</button>
+    </section>
+
+    <section class="screen" id="upload">
+      <p class="tag">3 žingsnis</p>
+      <h2>Įkelk pasirinktus duomenis</h2>
+
+      <div class="form">
+        <label>Delno arba veido nuotrauka</label>
+        <input type="file" accept="image/*" />
+
+        <label>Balso įrašas</label>
+        <input type="file" accept="audio/*" />
+
+        <label>Gimimo data</label>
+        <input type="date" />
+
+        <label>Partnerio vardas suderinamumui</label>
+        <input id="partnerName" placeholder="Pvz. Mantas" />
+
+        <label>Trumpai apie save</label>
+        <textarea placeholder="Parašyk, kas tau šiuo metu svarbiausia..."></textarea>
+      </div>
+
+      <button onclick="startAnalysis()">Analizuoti</button>
+    </section>
+
+    <section class="screen" id="loading">
+      <p class="tag">AUREA AI</p>
+      <h2>Kuriamas tavo gyvenimo profilis...</h2>
+
+      <div class="scanner">✋</div>
+      <p id="status">Skaitomi pasirinkti moduliai...</p>
+    </section>
+
+    <section class="screen" id="teaser">
+      <p class="tag">Rezultatai beveik paruošti</p>
+      <h2>Aptikome stiprius signalus</h2>
+
+      <div class="grid">
+        <div class="card">✅ Aukšta intuicija</div>
+        <div class="card">✅ Finansinis potencialas</div>
+        <div class="card">✅ Meilės jautrumas</div>
+        <div class="card">✅ Lyderystės energija</div>
+        <div class="card locked">🔒 Pinigų kelias</div>
+        <div class="card locked">🔒 Gyvenimo misija</div>
+        <div class="card locked">🔒 Suderinamumas</div>
+        <div class="card locked">🔒 Pilnas profilis</div>
+      </div>
+
+      <button onclick="goTo('payment')">Atrakinti analizę</button>
+    </section>
+
+    <section class="screen" id="payment">
+      <p class="tag">Premium analizė</p>
+      <h2>Tavo AI gyvenimo profilis paruoštas</h2>
+
+      <div class="price">29,99 €</div>
+
+      <p class="sub">
+        Įeina: meilė, finansai, karjera, gyvenimo misija, asmenybės archetipas,
+        stiprybės, iššūkiai ir suderinamumo analizė.
+      </p>
+
+      <button onclick="showResults()">Demo apmokėjimas</button>
+      <small>Tikram produktui čia vėliau prijungiama Stripe.</small>
+    </section>
+
+    <section class="screen" id="results">
+      <p class="tag">Tavo rezultatas</p>
+      <h2>Tavo gyvenimo profilis</h2>
+
+      <div class="scores">
+        <div><b>91%</b><span>Finansai</span></div>
+        <div><b>87%</b><span>Meilė</span></div>
+        <div><b>94%</b><span>Charizma</span></div>
+        <div><b>89%</b><span>Karjera</span></div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>👑 Archetipas</h3>
+          <p>Auksinis Vizionierius — žmogus, kuris mato galimybes anksčiau nei kiti.</p>
+        </article>
+
+        <article class="card">
+          <h3>❤️ Meilė</h3>
+          <p>Ieškai gilaus ryšio, lojalumo ir emocinio saugumo. Tave traukia stiprūs, bet jautrūs žmonės.</p>
+        </article>
+
+        <article class="card">
+          <h3>💰 Finansai</h3>
+          <p>Didžiausias potencialas: verslas, marketingas, pardavimai, konsultacijos ir skaitmeniniai produktai.</p>
+        </article>
+
+        <article class="card">
+          <h3>🚀 Karjera</h3>
+          <p>Tau tinka kryptys, kur reikia kūrybos, bendravimo, strategijos ir asmeninio prekės ženklo.</p>
+        </article>
+
+        <article class="card">
+          <h3>⭐ Gyvenimo misija</h3>
+          <p>Tavo kryptis — kurti vertę žmonėms per žinias, grožį, įžvalgas ir transformaciją.</p>
+        </article>
+
+        <article class="card">
+          <h3>⚠️ Iššūkiai</h3>
+          <p>Didžiausi stabdžiai: atidėliojimas, perfekcionizmas ir baimė būti matomam.</p>
+        </article>
+      </div>
+
+      <div class="compat card">
+        <h3>💞 Suderinamumas</h3>
+        <p id="compatibility">Suderinamumo potencialas: 89%. Stipriausia vieta — emocinė trauka ir bendras augimo noras.</p>
+      </div>
+
+      <button onclick="location.reload()">Pradėti iš naujo</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
