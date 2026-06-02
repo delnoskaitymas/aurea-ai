@@ -1,16 +1,12 @@
-const express = require("express");
-const path = require("path");
-
-const app = express();
-
-app.use(express.static(path.join(__dirname, "public")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`AUREA AI running on port ${PORT}`);
-});
+{
+  "name": "aurea-ai",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3",
+    "stripe": "^14.25.0"
+  }
+}
