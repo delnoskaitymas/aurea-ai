@@ -1,52 +1,53 @@
-function goTo(id) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
+function goTo(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const params=new URLSearchParams(window.location.search);
+  if(params.get("success")==="true") goTo("results");
+
+  document.getElementById("startBtn").onclick=()=>goTo("goal");
+  document.getElementById("toModules").onclick=()=>goTo("modules");
+  document.getElementById("toData").onclick=()=>goTo("data");
+  document.getElementById("toPayment").onclick=()=>goTo("payment");
+  document.getElementById("demoBtn").onclick=()=>showResults();
+
+  document.querySelectorAll(".choice").forEach(btn=>{
+    btn.onclick=()=>btn.classList.toggle("active");
   });
 
-  document.getElementById(id).classList.add("active");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+  document.getElementById("analyzeBtn").onclick=()=>{
+    goTo("loading");
+    setTimeout(()=>document.getElementById("status").textContent="Sujungiami delnų, veido, balso, testo ir datos signalai...",900);
+    setTimeout(()=>document.getElementById("status").textContent="Formuojamas tavo gyvenimo profilis...",1800);
+    setTimeout(()=>goTo("teaser"),3200);
+  };
 
-document.addEventListener("click", event => {
-  if (event.target.classList.contains("choice")) {
-    event.target.classList.toggle("active");
-  }
+  document.getElementById("stripeBtn").onclick=async()=>{
+    const errorBox=document.getElementById("payError");
+    errorBox.textContent="";
+
+    try{
+      const res=await fetch("/create-checkout-session",{method:"POST"});
+      const data=await res.json();
+
+      if(data.url){
+        window.location.href=data.url;
+      }else{
+        errorBox.textContent=data.error || "Nepavyko sukurti Stripe mokėjimo.";
+      }
+    }catch(e){
+      errorBox.textContent="Stripe klaida. Patikrink Railway Variables.";
+    }
+  };
 });
 
-function startAnalysis() {
-  goTo("loading");
-
-  const statuses = [
-    "Skaitomi pasirinkti analizės moduliai...",
-    "Vertinami meilės, finansų ir karjeros signalai...",
-    "Sujungiami delnų, veido, balso, testo ir gimimo datos duomenys...",
-    "Formuojamas tavo gyvenimo archetipas...",
-    "Premium analizė paruošta."
-  ];
-
-  let index = 0;
-  const status = document.getElementById("status");
-
-  const interval = setInterval(() => {
-    status.textContent = statuses[index];
-    index++;
-
-    if (index >= statuses.length) {
-      clearInterval(interval);
-
-      setTimeout(() => {
-        goTo("teaser");
-      }, 900);
-    }
-  }, 900);
-}
-
-function showResults() {
-  const partner = document.getElementById("partnerName").value.trim();
-  const text = partner
-    ? `${partner} suderinamumo potencialas: 89%. Stipriausia vieta — emocinė trauka, smalsumas ir noras augti kartu.`
-    : "Suderinamumo potencialas: 89%. Stipriausia vieta — emocinė trauka ir bendras augimo noras.";
-
-  document.getElementById("compatibility").textContent = text;
+function showResults(){
+  const partner=document.getElementById("partnerName").value.trim();
+  if(partner){
+    document.getElementById("compatibility").textContent=`💞 ${partner}: suderinamumas 89%. Stipriausia vieta — trauka, emocinis smalsumas ir bendras augimo noras.`;
+  }
   goTo("results");
 }
